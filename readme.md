@@ -17,7 +17,7 @@ It has the following:
   - Make of Car
   - Model
   - Year
-  - Colour
+  - Color
 
 - Driver details
 
