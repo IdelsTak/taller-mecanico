@@ -16,31 +16,34 @@
  */
 package com.github.idelstak.mecanico.domain.api;
 
-import com.github.idelstak.mecanico.domain.spi.VehicleProperties;
 import java.util.Objects;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.scene.paint.Color;
+import com.github.idelstak.mecanico.domain.spi.ReadOnlyVehicleProperties;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.ReadOnlyIntegerWrapper;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringProperty;
 
 /**
  *
  * @author Hiram K. <hiram.kamau@outlook.com>
  */
-public abstract class Vehicle implements VehicleProperties {
+public abstract class Vehicle implements ReadOnlyVehicleProperties {
 
-    private final SimpleStringProperty vinProperty;
-    private final SimpleStringProperty makeProperty;
-    private final SimpleStringProperty modelProperty;
-    private final SimpleIntegerProperty yearProperty;
-    private final SimpleObjectProperty<Color> colorProperty;
+    private final ReadOnlyStringWrapper vinProperty;
+    private final ReadOnlyStringWrapper makeProperty;
+    private final ReadOnlyStringWrapper modelProperty;
+    private final ReadOnlyIntegerWrapper yearProperty;
+    private final ReadOnlyObjectWrapper<Color> colorProperty;
 
     protected Vehicle(String VIN, String make, String model, int year, Color color) {
-        this.vinProperty = new SimpleStringProperty(VIN);
-        this.makeProperty = new SimpleStringProperty(make);
-        this.modelProperty = new SimpleStringProperty(model);
-        this.yearProperty = new SimpleIntegerProperty(year);
-        this.colorProperty = new SimpleObjectProperty<>(color);
+        this.vinProperty = new ReadOnlyStringWrapper(VIN);
+        this.makeProperty = new ReadOnlyStringWrapper(make);
+        this.modelProperty = new ReadOnlyStringWrapper(model);
+        this.yearProperty = new ReadOnlyIntegerWrapper(year);
+        this.colorProperty = new ReadOnlyObjectWrapper<>(color);
     }
 
     protected Vehicle(Vehicle other) {
@@ -52,28 +55,28 @@ public abstract class Vehicle implements VehicleProperties {
     }
 
     @Override
-    public SimpleStringProperty vinProperty() {
-        return vinProperty;
+    public ReadOnlyStringProperty vinProperty() {
+        return vinProperty.getReadOnlyProperty();
     }
 
     @Override
-    public SimpleStringProperty makeProperty() {
-        return makeProperty;
+    public ReadOnlyStringProperty makeProperty() {
+        return makeProperty.getReadOnlyProperty();
     }
 
     @Override
-    public SimpleStringProperty modelProperty() {
-        return modelProperty;
+    public ReadOnlyStringProperty modelProperty() {
+        return modelProperty.getReadOnlyProperty();
     }
 
     @Override
-    public SimpleIntegerProperty yearProperty() {
-        return yearProperty;
+    public ReadOnlyIntegerProperty yearProperty() {
+        return yearProperty.getReadOnlyProperty();
     }
 
     @Override
-    public SimpleObjectProperty<Color> colorProperty() {
-        return colorProperty;
+    public ReadOnlyObjectProperty colorProperty() {
+        return colorProperty.getReadOnlyProperty();
     }
 
     public String getVIN() {
