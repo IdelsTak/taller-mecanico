@@ -27,17 +27,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CarTest {
 
     /**
-     * Test of create method, of class Car.
+     * Test of
+     * {@link Car#of(java.lang.String, java.lang.String, java.lang.String, int, javafx.scene.paint.Color) of}
+     * method, of class {@code Car}.
      */
     @org.junit.jupiter.api.Test
-    public void testCreate() {
+    public void testOf() {
         var VIN = "JH4TB2H26CC000000";
         var make = "Acura MDX";
         var model = "TB2H2";
         var year = 2001;
         var color = Color.GRAY;
         var expectedCar = new Car(VIN, make, model, year, color);
-        var actualCar = Car.create(VIN, make, model, year, color);
+        var actualCar = Car.of(VIN, make, model, year, color);
 
         assertEquals(expectedCar, actualCar);
     }
