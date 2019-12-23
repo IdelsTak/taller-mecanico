@@ -17,6 +17,7 @@
 package com.github.idelstak.mecanico.domain.api;
 
 import javafx.scene.paint.Color;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
