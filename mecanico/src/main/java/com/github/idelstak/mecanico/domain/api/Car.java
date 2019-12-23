@@ -24,53 +24,17 @@ import javafx.scene.paint.Color;
  */
 public class Car extends Vehicle {
 
-    /**
-     * Factory builder for a {@code Car}.Provides a facility for verification
-     * of the parameters needed to create a {@code Car} object.
-     *
-     * @param VIN   the vehicle identification number
-     * @param make  the make of the vehicle
-     * @param model the vehicle's model
-     * @param year  the vehicle's year of manufacture (YOM)
-     * @param color the vehicle's color
-     *
-     * @return a new {@code Car} object
-     */
+    protected Car(String VIN, String make, String model, int year, Color color) {
+        super(VIN, make, model, year, color);
+    }
+
     public static Car create(
             String VIN,
             String make,
             String model,
             int year,
-            Color color) throws IllegalArgumentException {
-
-        if (VIN == null || VIN.isBlank()) {
-            throw new IllegalArgumentException("VIN should not be null nor blank");
-        }
-        if (make == null || make.isBlank()) {
-            throw new IllegalArgumentException("Car make should not be null nor blank");
-        }
-        if (model == null || model.isBlank()) {
-            throw new IllegalArgumentException("Car model should not be null nor blank");
-        }
-        if (color == null) {
-            throw new IllegalArgumentException("Car color should not be null");
-        }
-
+            Color color) {
         return new Car(VIN, make, model, year, color);
-    }
-
-    /**
-     * Made {@code protected} for testing purposes. Otherwise, should be
-     * {@code private}.
-     *
-     * @param VIN
-     * @param make
-     * @param model
-     * @param year
-     * @param color
-     */
-    protected Car(String VIN, String make, String model, int year, Color color) {
-        super(VIN, make, model, year, color);
     }
 
     @Override
