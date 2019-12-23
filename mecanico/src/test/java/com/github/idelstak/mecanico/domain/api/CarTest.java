@@ -32,14 +32,13 @@ public class CarTest {
     public void testCreate() {
         System.out.println("testCreate...");
 
-        String VIN = "JH4TB2H26CC000000";
-        String make = "Acura MDX";
-        String model = "TB2H2";
-        int year = 2001;
-        Color color = Color.GRAY;
-
-        Car expectedCar = new Car(VIN, make, model, year, color);
-        Car actualCar = Car.create(VIN, make, model, year, color);
+        var VIN = "JH4TB2H26CC000000";
+        var make = "Acura MDX";
+        var model = "TB2H2";
+        var year = 2001;
+        var color = Color.GRAY;
+        var expectedCar = new Car(VIN, make, model, year, color);
+        var actualCar = Car.create(VIN, make, model, year, color);
 
         System.out.println(String.format(
                 "Testing whether %s \nis equal to \n%s",
