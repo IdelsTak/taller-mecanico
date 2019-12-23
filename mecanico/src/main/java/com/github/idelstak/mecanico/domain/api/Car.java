@@ -28,7 +28,7 @@ public class Car extends Vehicle {
         super(VIN, make, model, year, color);
     }
 
-    public static Car create(
+    public static Car of(
             String VIN,
             String make,
             String model,
@@ -39,7 +39,7 @@ public class Car extends Vehicle {
 
     @Override
     public String toString() {
-        return String.format("Car: %s", super.toString());
+        return String.format("Car: \n%s", super.toString());
     }
 
 }
