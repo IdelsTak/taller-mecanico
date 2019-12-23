@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
  * @author Hiram K. <hiram.kamau@outlook.com>
  */
 public class AddressTest {
-    
+
 //    public AddressTest() {
 //    }
 //
@@ -48,16 +48,15 @@ public class AddressTest {
 //    public void testHashCode() {
 //    }
 //
-//    @Test
-//    public void testEquals() {
-//    }
-
     @Test
-    public void testToString() {
+    public void testEquals() {
         var unexpectedAddress = Address.EMPTY;
         var actualAddress = Address.from("P.O. Box 19000");
-        
+
         Assertions.assertNotEquals(unexpectedAddress, actualAddress);
     }
-    
+
+//    @Test
+//    public void testToString() {
+//    }
 }
