@@ -32,7 +32,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author Hiram K. <hiram.kamau@outlook.com>
  */
-public abstract class Vehicle implements ReadOnlyVehicleProperties {
+public class Vehicle implements ReadOnlyVehicleProperties {
 
     private final ReadOnlyStringWrapper vinProperty;
     private final ReadOnlyStringWrapper makeProperty;
@@ -207,14 +207,14 @@ public abstract class Vehicle implements ReadOnlyVehicleProperties {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("\n------------------------");
-        sb.append(String.format("\nVIN: %s", getVin()));
-        sb.append(String.format("\nMake: %s", getMake()));
-        sb.append(String.format("\nModel: %s", getModel()));
-        sb.append(String.format("\nYear: %d", getYear()));
-        sb.append(String.format("\nColor: %s", getColor()));
-        sb.append("\n------------------------");
-        return sb.toString();
+        return new StringBuilder("------------------------")
+                .append(String.format("\nVIN: %s", getVin()))
+                .append(String.format("\nMake: %s", getMake()))
+                .append(String.format("\nModel: %s", getModel()))
+                .append(String.format("\nYear: %d", getYear()))
+                .append(String.format("\nColor: %s", getColor()))
+                .append("\n------------------------")
+                .toString();
     }
 
 }
