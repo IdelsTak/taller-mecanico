@@ -31,10 +31,19 @@ public class Address implements ReadOnlyAddressProperty {
     public static final Address EMPTY = new Empty();
     private final ReadOnlyStringWrapper detailsPropertyWrapper;
 
+    /**
+     * Meant to be used by the {@link Empty} address only.
+     */
     private Address() {
         this.detailsPropertyWrapper = new ReadOnlyStringWrapper(null);
     }
 
+    /**
+     * Throws an {@link IllegalArgumentException} when a {@code null} or empty
+     * string is supplied to it.
+     *
+     * @param details the non{@code null} and non-empty address details
+     */
     protected Address(String details) {
         if (StringUtils.isBlank(details)) {
             var message = "Address details should not be null nor empty";
@@ -44,6 +53,13 @@ public class Address implements ReadOnlyAddressProperty {
         this.detailsPropertyWrapper = new ReadOnlyStringWrapper(details);
     }
 
+    /**
+     * Creates an {@code Address} from the supplied details.
+     *
+     * @param details
+     *
+     * @return a new {@code Address} instance.
+     */
     public static Address from(String details) {
         return new Address(details);
     }
@@ -57,6 +73,12 @@ public class Address implements ReadOnlyAddressProperty {
         return detailsPropertyWrapper.get();
     }
 
+    /**
+     * Throws an {@link IllegalArgumentException} when a {@code null} or empty
+     * string is supplied to it.
+     *
+     * @param details
+     */
     public void setDetails(String details) {
         if (StringUtils.isBlank(details)) {
             var message = "Address details should not be null nor empty";
@@ -95,7 +117,15 @@ public class Address implements ReadOnlyAddressProperty {
                 .toString();
     }
 
-    private static class Empty extends Address {
+    /**
+     * A Convenience whose main purpose is to provide a "N/A" string
+     * representation of this class.
+     * <p>
+     * It has null details. And throws an {@link UnsupportedOperationException}
+     * when its {@link Empty#setDetails(java.lang.String) setDetails} method is
+     * supplied with a value.
+     */
+    public static class Empty extends Address {
 
         private Empty() {
             super();
@@ -104,6 +134,11 @@ public class Address implements ReadOnlyAddressProperty {
         @Override
         public String toString() {
             return "N/A";
+        }
+
+        @Override
+        public void setDetails(String details) {
+            throw new UnsupportedOperationException("Shouldn't add details to an empty address");
         }
 
     }
