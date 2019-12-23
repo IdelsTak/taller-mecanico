@@ -76,7 +76,7 @@ public abstract class Vehicle implements ReadOnlyVehicleProperties {
     }
 
     @Override
-    public ReadOnlyObjectProperty colorProperty() {
+    public ReadOnlyObjectProperty<Color> colorProperty() {
         return colorProperty.getReadOnlyProperty();
     }
 
