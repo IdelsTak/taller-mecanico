@@ -41,10 +41,31 @@ public class VehicleTest {
     }
 
     @Test
+    public void testSetVin() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> vehicle.setVin(null));
+    }
+
+    @Test
+    public void testSetMake() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> vehicle.setMake(null));
+    }
+
+    @Test
     public void testSetModel() {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> vehicle.setModel(""));
+    }
+
+    @Test
+    public void testSetColor() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> vehicle.setColor(null));
     }
 
     @Test
