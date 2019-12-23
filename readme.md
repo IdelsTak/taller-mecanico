@@ -30,7 +30,7 @@ It has the following:
 ## Features
 
 - The software should can schedule an appointment (the date comes up as a reminder one week to the due date)
-- Prints the details of a job done to be on a sheet.
+- Prints the details of a job to be done on a sheet.
 - Ticks off details of what was checked on a  vehicle (these are customizable if the details are not specified). Example details include:
 
     1. Lights
