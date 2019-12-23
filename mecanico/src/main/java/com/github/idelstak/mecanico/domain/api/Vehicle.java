@@ -25,6 +25,7 @@ import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringProperty;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -100,14 +101,12 @@ public abstract class Vehicle implements ReadOnlyVehicleProperties {
     }
 
     public void setModel(String model) {
-        if (model.isBlank()) {
-            throw new IllegalArgumentException("Vehicle model should not be blank");
+        if (StringUtils.isBlank(model)) {
+            var message = "Vehicle model should not be null nor empty";
+            throw new IllegalArgumentException(message);
         }
 
-        var message = "Car model should not be null";
-        var nonNullModel = Objects.requireNonNull(model, message);
-
-        modelProperty.set(nonNullModel);
+        modelProperty.set(model);
     }
 
     public int getYear() {
