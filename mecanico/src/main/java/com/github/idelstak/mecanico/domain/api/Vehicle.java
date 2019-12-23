@@ -16,15 +16,16 @@
  */
 package com.github.idelstak.mecanico.domain.api;
 
-import java.util.Objects;
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.scene.paint.Color;
 import com.github.idelstak.mecanico.domain.spi.ReadOnlyVehicleProperties;
+import java.util.Objects;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.scene.paint.Color;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -39,8 +40,27 @@ public abstract class Vehicle implements ReadOnlyVehicleProperties {
     private final ReadOnlyIntegerWrapper yearProperty;
     private final ReadOnlyObjectWrapper<Color> colorProperty;
 
-    protected Vehicle(String VIN, String make, String model, int year, Color color) {
-        this.vinProperty = new ReadOnlyStringWrapper(VIN);
+    protected Vehicle(
+            String vin,
+            String make,
+            String model,
+            int year,
+            Color color) throws IllegalArgumentException {
+
+        if (StringUtils.isBlank(vin)) {
+            throw new IllegalArgumentException("VIN should not be null nor blank");
+        }
+        if (StringUtils.isBlank(make)) {
+            throw new IllegalArgumentException("Car make should not be null nor blank");
+        }
+        if (StringUtils.isBlank(model)) {
+            throw new IllegalArgumentException("Car model should not be null nor blank");
+        }
+        if (ObjectUtils.isEmpty(color)) {
+            throw new IllegalArgumentException("Car color should not be null");
+        }
+
+        this.vinProperty = new ReadOnlyStringWrapper(vin);
         this.makeProperty = new ReadOnlyStringWrapper(make);
         this.modelProperty = new ReadOnlyStringWrapper(model);
         this.yearProperty = new ReadOnlyIntegerWrapper(year);
@@ -48,7 +68,7 @@ public abstract class Vehicle implements ReadOnlyVehicleProperties {
     }
 
     protected Vehicle(Vehicle other) {
-        this(other.getVIN(),
+        this(other.getVin(),
                 other.getMake(),
                 other.getModel(),
                 other.getYear(),
@@ -80,12 +100,17 @@ public abstract class Vehicle implements ReadOnlyVehicleProperties {
         return colorProperty.getReadOnlyProperty();
     }
 
-    public String getVIN() {
+    public String getVin() {
         return vinProperty.get();
     }
 
-    public void setVIN(String VIN) {
-        vinProperty.set(VIN);
+    public void setVin(String vin) {
+        if (StringUtils.isBlank(vin)) {
+            var message = "VIN should not be null nor empty";
+            throw new IllegalArgumentException(message);
+        }
+
+        vinProperty.set(vin);
     }
 
     public String getMake() {
@@ -93,6 +118,11 @@ public abstract class Vehicle implements ReadOnlyVehicleProperties {
     }
 
     public void setMake(String make) {
+        if (StringUtils.isBlank(make)) {
+            var message = "Vehicle make should not be null nor empty";
+            throw new IllegalArgumentException(message);
+        }
+
         makeProperty.set(make);
     }
 
@@ -122,16 +152,17 @@ public abstract class Vehicle implements ReadOnlyVehicleProperties {
     }
 
     public void setColor(Color color) {
-        var message = "Color should not be null";
-        var nonNullColor = Objects.requireNonNull(color, message);
+        if (ObjectUtils.isEmpty(color)) {
+            throw new IllegalArgumentException("Color should not be null");
+        }
 
-        colorProperty.set(nonNullColor);
+        colorProperty.set(color);
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 43 * hash + Objects.hashCode(this.getVIN());
+        hash = 43 * hash + Objects.hashCode(this.getVin());
         hash = 43 * hash + Objects.hashCode(this.getMake());
         hash = 43 * hash + Objects.hashCode(this.getModel());
         hash = 43 * hash + Objects.hashCode(this.getYear());
@@ -151,7 +182,7 @@ public abstract class Vehicle implements ReadOnlyVehicleProperties {
             return false;
         }
         final Vehicle other = (Vehicle) obj;
-        if (!Objects.equals(this.getVIN(), other.getVIN())) {
+        if (!Objects.equals(this.getVin(), other.getVin())) {
             return false;
         }
         if (!Objects.equals(this.getMake(), other.getMake())) {
@@ -177,7 +208,7 @@ public abstract class Vehicle implements ReadOnlyVehicleProperties {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("\n------------------------");
-        sb.append(String.format("\nVIN: %s", getVIN()));
+        sb.append(String.format("\nVIN: %s", getVin()));
         sb.append(String.format("\nMake: %s", getMake()));
         sb.append(String.format("\nModel: %s", getModel()));
         sb.append(String.format("\nYear: %d", getYear()));
