@@ -26,88 +26,34 @@ import org.junit.jupiter.api.Test;
  */
 public class VehicleTest {
 
-//    public VehicleTest() {
-//    }
-//
-//    @Test
-//    public void testVinProperty() {
-//    }
-//
-//    @Test
-//    public void testMakeProperty() {
-//    }
-//
-//    @Test
-//    public void testModelProperty() {
-//    }
-//
-//    @Test
-//    public void testYearProperty() {
-//    }
-//
-//    @Test
-//    public void testColorProperty() {
-//    }
-//
-//    @Test
-//    public void testGetVIN() {
-//    }
-//
-//    @Test
-//    public void testSetVIN() {
-//    }
-//
-//    @Test
-//    public void testGetMake() {
-//    }
-//
-//    @Test
-//    public void testSetMake() {
-//    }
-//
-//    @Test
-//    public void testGetModel() {
-//    }
-//
-//    @Test
-//    public void testSetModel() {
-//    }
-//
-//    @Test
-//    public void testGetYear() {
-//    }
-//
-//    @Test
-//    public void testSetYear() {
-//    }
-//
-//    @Test
-//    public void testGetColor() {
-//    }
-//
-//    @Test
-//    public void testSetColor() {
-//    }
-//
-//    @Test
-//    public void testHashCode() {
-//    }
-//
-//    @Test
-//    public void testEquals() {
-//    }
-    @Test
-    public void testToString() {
-        System.out.println("testToString...");
+    private final Vehicle vehicle;
 
+    {
         var VIN = "JH4TB2H26CC000000";
         var make = "Acura MDX";
         var model = "TB2H2";
         var year = 2001;
         var color = Color.GRAY;
 
-        Vehicle vehicle = new BasicVehicle(VIN, make, model, year, color);
+        vehicle = new BasicVehicle(VIN, make, model, year, color);
+    }
 
+    @Test
+    public void whetherSettingBlankModelThrowsIllegalArgumentException() {
+
+    }
+
+    @Test
+    public void testToString() {
+        System.out.println("testToString...");
+
+//        var VIN = "JH4TB2H26CC000000";
+//        var make = "Acura MDX";
+//        var model = "TB2H2";
+//        var year = 2001;
+//        var color = Color.GRAY;
+//
+//        Vehicle vehicle = new BasicVehicle(VIN, make, model, year, color);
         var expectedToString = new StringBuilder("\n------------------------\n")
                 .append("VIN: JH4TB2H26CC000000\n")
                 .append("Make: Acura MDX\n")
