@@ -17,8 +17,10 @@
 package com.github.idelstak.mecanico.domain.api;
 
 import javafx.scene.paint.Color;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  *
@@ -39,21 +41,14 @@ public class VehicleTest {
     }
 
     @Test
-    public void whetherSettingBlankModelThrowsIllegalArgumentException() {
-
+    public void testSetModel() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> vehicle.setModel(""));
     }
 
     @Test
     public void testToString() {
-        System.out.println("testToString...");
-
-//        var VIN = "JH4TB2H26CC000000";
-//        var make = "Acura MDX";
-//        var model = "TB2H2";
-//        var year = 2001;
-//        var color = Color.GRAY;
-//
-//        Vehicle vehicle = new BasicVehicle(VIN, make, model, year, color);
         var expectedToString = new StringBuilder("\n------------------------\n")
                 .append("VIN: JH4TB2H26CC000000\n")
                 .append("Make: Acura MDX\n")
@@ -64,7 +59,7 @@ public class VehicleTest {
                 .toString();
         var actualToString = vehicle.toString();
 
-        Assertions.assertEquals(expectedToString, actualToString);
+        assertEquals(expectedToString, actualToString);
     }
 
     private class BasicVehicle extends Vehicle {
