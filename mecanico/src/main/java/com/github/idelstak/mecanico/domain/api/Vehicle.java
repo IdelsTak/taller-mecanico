@@ -43,6 +43,14 @@ public abstract class Vehicle implements VehicleProperties {
         this.colorProperty = new SimpleObjectProperty<>(color);
     }
 
+    protected Vehicle(Vehicle other) {
+        this(other.getVIN(),
+                other.getMake(),
+                other.getModel(),
+                other.getYear(),
+                other.getColor());
+    }
+
     @Override
     public SimpleStringProperty vinProperty() {
         return vinProperty;
@@ -92,10 +100,10 @@ public abstract class Vehicle implements VehicleProperties {
         if (model.isBlank()) {
             throw new IllegalArgumentException("Vehicle model should not be blank");
         }
-        
+
         var message = "Car model should not be null";
         var nonNullModel = Objects.requireNonNull(model, message);
-        
+
         modelProperty.set(nonNullModel);
     }
 
@@ -114,7 +122,7 @@ public abstract class Vehicle implements VehicleProperties {
     public void setColor(Color color) {
         var message = "Color should not be null";
         var nonNullColor = Objects.requireNonNull(color, message);
-        
+
         colorProperty.set(nonNullColor);
     }
 
